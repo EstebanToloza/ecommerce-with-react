@@ -1,7 +1,6 @@
 import React from 'react';
 import accounting from 'accounting';
 import { Button } from '@material-ui/core';
-import { classes } from 'istanbul-lib-coverage';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
