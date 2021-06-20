@@ -10,10 +10,10 @@ function App() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route path="/checkout-page">
+          <Route path='/checkout-page'>
             <CheckoutPage />
           </Route>
-          <Route path="/">
+          <Route path='/'>
             <Products />
           </Route>
         </Switch>
