@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link as RouteLink, useHistory } from 'react-router-dom';
+import { auth } from '../firebase';
 
 function Copyright() {
   return (
@@ -49,6 +50,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const signup = (e) => {
+    e.preventDefault();
+    auth.createUserWithEmailAndPassword(email, password).then((auth)=> {
+      console.log(auth);
+      if(auth) {
+        history.push("/");
+      }
+    }).catch(err=>alert(err.message))
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -87,6 +101,8 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 variant="outlined"
                 required
                 fullWidth
@@ -98,6 +114,8 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 variant="outlined"
                 required
                 fullWidth
@@ -121,6 +139,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={signup}
           >
             Sign Up
           </Button>
